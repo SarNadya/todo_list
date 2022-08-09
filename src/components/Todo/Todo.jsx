@@ -1,11 +1,12 @@
 import React from "react";
+import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.sass";
 
-function Todo() {
+function Todo({tasks, onClickDone}) {
     return (
         <div className={styles.wrap}>
             <div className={styles.list}>
-                Задачи
+                <TodoList tasks={tasks} onClickDone={onClickDone}/>
             </div>
             <div className={styles.editing}>
                 Редактирование
