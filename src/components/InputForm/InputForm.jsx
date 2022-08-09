@@ -17,6 +17,11 @@ function InputForm({tasks, addTask}) {
                 label='Введите задачу'
                 value={value}
                 onChange={event => setValue(event.target.value)}
+                onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                        clickButton()
+                    }
+                }}
             />
             <button className={styles.button}
                 type='submit'
