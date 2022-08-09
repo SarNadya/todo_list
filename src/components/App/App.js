@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputForm from "../InputForm/InputForm";
 import Todo from "../Todo/Todo";
+import styles from "./App.module.sass";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -29,10 +30,16 @@ function App() {
         setTasks(newTasks);
     }
 
+    const deleteTask = id => {
+        const newTasks = tasks.filter(task => task.id !== id);
+        setTasks(newTasks);
+        setCount( count - 1);
+    }
+
     return (
-        <div>
+        <div className={styles.wrap}>
             <InputForm tasks={tasks} addTask={addTask}/>
-            <Todo tasks={tasks} onClickDone={onClickDone}/>
+            <Todo tasks={tasks} onClickDone={onClickDone} deleteTask={deleteTask}/>
         </div>
     );
 }
