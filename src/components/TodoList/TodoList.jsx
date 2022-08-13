@@ -2,7 +2,7 @@ import React from "react";
 import TodoTask from "../TodoTask/TodoTask";
 import styles from "./TodoList.module.sass";
 
-function TodoList({tasks, onClickDone, deleteTask}) {
+function TodoList({tasks, onClickDone, deleteTask, markTask}) {
     return (
         <div className={styles.wrap}>
             {tasks.map(task =>
@@ -13,6 +13,7 @@ function TodoList({tasks, onClickDone, deleteTask}) {
                     key={task.value + task.id}
                     onClickDone={onClickDone}
                     deleteTask={deleteTask}
+                    markTask={markTask}
                 />
                 )}
         </div>

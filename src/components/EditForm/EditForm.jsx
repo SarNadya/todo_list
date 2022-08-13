@@ -1,20 +1,28 @@
 import React from "react";
-import { useState } from "react";
-import styles from "./InputForm.module.sass";
+import { useState, useEffect } from "react";
+import styles from "./EditForm.module.sass";
 
-function InputForm({tasks, addTask}) {
+function EditForm({editValue, editTask}) {
     const [value, setValue] = useState('');
 
-    const clickButton = () => {
+    useEffect(() => {
+        getValue();
+    }, [editValue]);
+
+    const getValue = () => {
+        setValue(editValue);
+    };
+
+    const clickButton = id => {
         setValue('');
-        addTask(value);
+        editTask(value);
     };
 
     return (
         <div className={styles.wrap}>
-            <input className={styles.input}
-                type='text'
-                placeholder='Добавить задачу'
+            <textarea className={styles.text}
+                placeholder='Окно для редактирования'
+                name='text'
                 value={value}
                 onChange={event => setValue(event.target.value)}
                 onKeyPress={event => {
@@ -27,10 +35,10 @@ function InputForm({tasks, addTask}) {
                 type='submit'
                 onClick={clickButton}
             >
-                +
+                сохранить
             </button>
         </div>
     );
 }
 
-export default InputForm;
+export default EditForm;
