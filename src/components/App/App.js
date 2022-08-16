@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import InputForm from "../InputForm/InputForm";
+import SearchForm from "../SearchForm/SearchForm";
 import Todo from "../Todo/Todo";
 import styles from "./App.module.sass";
 
@@ -9,6 +10,8 @@ function App() {
     const [count, setCount] = useState(0);
 
     const [editValue, setEditValue] = useState('');
+
+    const [searchedTasks, setSearchedTasks] = useState(tasks);
 
     //добавление задачи
     const addTask = value => {
@@ -67,10 +70,28 @@ function App() {
         setTasks(newTasks);
     }
 
+    // реализуем поиск задачи и вывод результата в консоль
+    const findTask = value => {
+        const filteredTasks = [...tasks].filter(task => task.value.toLowerCase().includes(value));
+        if (filteredTasks.length === 0) {
+            console.log('Задачи не найдены');
+        } else if (filteredTasks.length > 0) {
+            console.log(filteredTasks);
+        } else {
+            console.log(tasks);
+        }
+    }
+
+    const shownTasks = findTask();
+
     return (
         <div className={styles.wrap}>
-            <InputForm tasks={tasks} addTask={addTask}/>
+            <div className={styles.forms}>
+                <InputForm tasks={tasks} addTask={addTask}/>
+                <SearchForm findTask={findTask}/>
+            </div>
             <Todo tasks={tasks}
+                searchedTasks={searchedTasks}
                 onClickDone={onClickDone}
                 deleteTask={deleteTask}
                 markTask={markTask}
