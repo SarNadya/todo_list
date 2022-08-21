@@ -11,7 +11,7 @@ function App() {
 
     const [editValue, setEditValue] = useState('');
 
-    const [searchedTasks, setSearchedTasks] = useState(tasks);
+    const [shownTasks, setShownTasks] = useState([]);
 
     //добавление задачи
     const addTask = value => {
@@ -25,6 +25,7 @@ function App() {
             }
         ];
         setTasks(newTasks);
+        setShownTasks(newTasks);
         setCount(count + 1);
     };
 
@@ -36,12 +37,14 @@ function App() {
             return newTask;
         });
         setTasks(newTasks);
+        setShownTasks(newTasks);
     }
 
     //удаление задачи
     const deleteTask = id => {
         const newTasks = tasks.filter(task => task.id !== id);
         setTasks(newTasks);
+        setShownTasks(newTasks);
         setCount( count - 1);
     }
 
@@ -55,6 +58,7 @@ function App() {
         const edVal = tasks[id -1].value;
         setEditValue(edVal);
         setTasks(newTasks);
+        setShownTasks(newTasks);
     }
 
     //находим помеченную задачу, редактируем ее и снимаем отметку
@@ -68,30 +72,29 @@ function App() {
             return newTask;
         });
         setTasks(newTasks);
+        setShownTasks(newTasks);
     }
 
-    // реализуем поиск задачи и вывод результата в консоль
+    // реализуем поиск задачи
     const findTask = value => {
         const filteredTasks = [...tasks].filter(task => task.value.toLowerCase().includes(value));
         if (filteredTasks.length === 0) {
-            console.log('Задачи не найдены');
+            setShownTasks([]);
         } else if (filteredTasks.length > 0) {
-            console.log(filteredTasks);
+            setShownTasks(filteredTasks);
         } else {
-            console.log(tasks);
+            setShownTasks(tasks);
         }
     }
-
-    const shownTasks = findTask();
 
     return (
         <div className={styles.wrap}>
             <div className={styles.forms}>
-                <InputForm tasks={tasks} addTask={addTask}/>
+                <InputForm addTask={addTask}/>
                 <SearchForm findTask={findTask}/>
             </div>
-            <Todo tasks={tasks}
-                searchedTasks={searchedTasks}
+            <Todo
+                shownTasks={shownTasks}
                 onClickDone={onClickDone}
                 deleteTask={deleteTask}
                 markTask={markTask}

@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./SearchForm.module.sass";
 
 function SearchForm({findTask}) {

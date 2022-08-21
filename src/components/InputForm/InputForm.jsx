@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styles from "./InputForm.module.sass";
 
-function InputForm({tasks, addTask}) {
+function InputForm({addTask}) {
     const [value, setValue] = useState('');
 
     const clickButton = () => {

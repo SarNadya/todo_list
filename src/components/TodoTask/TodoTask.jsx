@@ -10,6 +10,7 @@ function TodoTask({value, id, isDone, onClickDone, deleteTask, markTask}) {
             <div className={styles.checkbox} onClick={() => onClickDone(id)}>
                 <input className={styles.checkbox_input}
                     type='checkbox'
+                    readOnly
                     checked={isDone}
                     id={id}
                     value={value}

@@ -3,11 +3,12 @@ import EditForm from "../EditForm/EditForm";
 import TodoList from "../TodoList/TodoList";
 import styles from "./Todo.module.sass";
 
-function Todo({tasks, onClickDone, deleteTask, markTask, editValue, editTask}) {
+function Todo({shownTasks, onClickDone, deleteTask, markTask, editValue, editTask}) {
     return (
         <div className={styles.wrap}>
             <div className={styles.list}>
-                <TodoList tasks={tasks}
+                <TodoList
+                    shownTasks={shownTasks}
                     onClickDone={onClickDone}
                     deleteTask={deleteTask}
                     markTask={markTask}

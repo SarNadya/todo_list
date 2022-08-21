@@ -2,12 +2,12 @@ import React from "react";
 import TodoTask from "../TodoTask/TodoTask";
 import styles from "./TodoList.module.sass";
 
-function TodoList({tasks, searchedTasks, onClickDone, deleteTask, markTask}) {
+function TodoList({shownTasks, onClickDone, deleteTask, markTask}) {
     return (
         <div className={styles.wrap}>
-            { tasks.length > 0 ? 
+            { shownTasks.length > 0 ? 
                 <div>
-                    { tasks.map(task =>
+                    { shownTasks.map(task =>
                         <TodoTask
                             value={task.value}
                             isDone={task.isDone}
@@ -17,8 +17,9 @@ function TodoList({tasks, searchedTasks, onClickDone, deleteTask, markTask}) {
                             deleteTask={deleteTask}
                             markTask={markTask}
                         />
-                        )}
-                    </div> :
+                    )}
+                </div> : shownTasks.length === 0 ?
+                <h5> Задачи не найдены </h5> :
                 <h5> Нет добавленных задач </h5>
             }
         </div>
